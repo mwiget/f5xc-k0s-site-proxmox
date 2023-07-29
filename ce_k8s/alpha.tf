@@ -40,7 +40,7 @@ resource "volterra_registration_approval" "alpha" {
   hostname = format("vp-manager-%d", count.index)
 }
 
-resource "null_resource" "check_site_status" {
+resource "null_resource" "check_site_status_alpha" {
   depends_on = [volterra_registration_approval.alpha]
   provisioner "local-exec" {
     command     = format("./scripts/check.sh %s %s %s", local.site_get_url_alpha, local.f5xc_api_token, local.f5xc_tenant)
@@ -48,7 +48,7 @@ resource "null_resource" "check_site_status" {
   }
 }
 
-resource "volterra_site_state" "decommission_when_delete" {
+resource "volterra_site_state" "decommission_when_delete_alpha" {
   depends_on = [volterra_registration_approval.alpha]
   name       = format("%s-alpha", var.project_prefix)
   when       = "delete"
