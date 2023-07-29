@@ -26,8 +26,8 @@ $ ./cluster-info.sh
 
 alpha .... 
 
-Kubernetes control plane [0m is running at [https://192.168.40.68:6443
-CoreDNS[0m is running at [https://192.168.40.68:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Kubernetes control plane is running at https://192.168.40.68:6443
+CoreDNS is running at https://192.168.40.68:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
@@ -53,8 +53,8 @@ vp-manager-2                  1/1     Running   2 (32m ago)     34m
 
 beta ...
 
-[0;32mKubernetes control plane[0m is running at [0;33mhttps://192.168.40.80:6443[0m
-[0;32mCoreDNS[0m is running at [0;33mhttps://192.168.40.80:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy[0m
+[Kubernetes control plane is running at https://192.168.40.80:6443
+[CoreDNS is running at https://192.168.40.80:6443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
