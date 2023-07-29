@@ -19,6 +19,11 @@ Deploy k0s clusters with 1 or more worker nodes on proxmox and deploy F5 XC kube
 
 ```
 
+Site Mesh Group is established between the clusters:
+
+![Site Mesh Group](images/smg.jpg)
+
+
 ## Deployment
 
 First 2 k0s clusters alpha and beta:
