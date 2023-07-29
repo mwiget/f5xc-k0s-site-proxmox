@@ -1,0 +1,12 @@
+.env*
+*tfstate*
+*tfvars
+*tfvars.json
+*.p12
+*.crt
+.terraform*
+*.save
+*.json
+*.kubeconfig
+files
+ce_k8s_*.yaml

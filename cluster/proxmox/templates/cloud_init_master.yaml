@@ -1,0 +1,64 @@
+#cloud-config
+users:
+  - name: ${vm_user}
+    primary_group: ${vm_user}
+    groups: sudo, wheel
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    ssh_import_id:
+      - gh:${vm_user}
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ${ssh_key}
+
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true
+packages:
+  - qemu-guest-agent
+  - nfs-common
+  - tmux
+  - bwm-ng
+  - tcpdump
+  - net-tools
+  - git
+  - curl
+  - jq
+  - mosh
+
+write_files:
+- path: /usr/local/etc/k0s.yaml
+  permissions: '0644'
+  content: |
+    spec:
+      extensions:
+        storage:
+          type: openebs_local_storage
+
+- path: /usr/local/etc/install_k0s.sh
+  permissions: '0755'
+  content: |
+    #!/usr/bin/env bash
+    echo "download and install k0s ..."
+    curl -sSLf https://get.k0s.sh | K0S_VERSION=v1.23.15+k0s.0 sh
+    chmod +x /usr/local/bin/k0s
+    /usr/local/bin/k0s install controller --config /usr/local/etc/k0s.yaml
+    /usr/local/bin/k0s start
+    ln -s /usr/local/bin/k0s /usr/local/bin/kubectl
+    until /usr/local/bin/k0s kubectl get storageclass openebs-hostpath; do echo "waiting for k0s ready ..." && sleep 5; done
+    sleep 5
+    echo "set default storage class ..."
+    /usr/local/bin/k0s kubectl patch storageclass openebs-hostpath -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+    echo "create k0s cluster token and store on nfs server ..."
+    mount 192.168.40.2:/opt/nfs_shared_folder /mnt/
+    /usr/local/bin/k0s token create --role=worker > /mnt/${cluster_name}-worker.token
+    umount /mnt/
+
+bootcmd:
+  - hostname ${host-name}
+
+runcmd:
+  - /usr/local/etc/install_k0s.sh
+
+hostname: ${host-name}
+fqdn: ${host-name}
+
