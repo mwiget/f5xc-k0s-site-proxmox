@@ -2,6 +2,23 @@
 
 Deploy k0s clusters with 1 or more worker nodes on proxmox and deploy F5 XC kubernetes site (ce pod) on them.
 
+```
++------------+  +----------+ +----------+ +----------+
+|   alpha    |  |  alpha   | |  alpha   | |  alpha   |
+| controller |  | worker-0 | | worker-1 | | worker-2 |
+|   k0s VM   |  |  k0s VM  | |  k0s VM  | |  k0s VM  |
++------------+  +----------+ +----------+ +----------+
+      |              |            |            |
+  |------------------------------------------------|
+       |              |            |            |
++------------+  +----------+ +----------+ +----------+
+|    beta    |  |   beta   | |   beta   | |   beta   |
+| controller |  | worker-0 | | worker-1 | | worker-2 |
+|   k0s VM   |  |  k0s VM  | |  k0s VM  | |  k0s VM  |
++------------+  +----------+ +----------+ +----------+
+
+```
+
 ## Deployment
 
 First 2 k0s clusters alpha and beta:
