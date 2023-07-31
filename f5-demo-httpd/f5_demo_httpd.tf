@@ -1,7 +1,7 @@
 resource "kubernetes_deployment" "f5-demo-httpd" {
   metadata {
     name = "f5-demo-httpd"
-    namespace = kubernetes_namespace.ns.id
+    namespace = kubernetes_namespace.beta.id
     labels = {
       app = "f5-demo-httpd"
     }
@@ -59,12 +59,13 @@ resource "kubernetes_deployment" "f5-demo-httpd" {
       }
     }
   }
+  provider = kubernetes.beta
 }
 
 resource "kubernetes_service" "ks" {
   metadata {
     name = "f5-demo-httpd"
-    namespace = kubernetes_namespace.ns.id
+    namespace = kubernetes_namespace.beta.id
   }
   spec {
     selector = {
@@ -78,6 +79,7 @@ resource "kubernetes_service" "ks" {
 
     type = "ClusterIP"
   }
+  provider = kubernetes.beta
 }
 
 output "f5-demo-http" {

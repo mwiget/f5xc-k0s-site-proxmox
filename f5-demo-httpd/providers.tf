@@ -4,5 +4,12 @@ provider "volterra" {
 }
 
 provider "kubernetes" {
-  config_path    = "../beta.kubeconfig"
+  config_path    = "../alpha.kubeconfig"
+  alias = "alpha"
 }
+
+provider "kubernetes" {
+  config_path    = "../beta.kubeconfig"
+  alias = "beta"
+}
+
