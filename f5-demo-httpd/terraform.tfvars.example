@@ -1,0 +1,8 @@
+project_prefix    = "prefix"
+f5xc_namespace    = "prefix-f5-demo-httpd"
+owner             = "user@email"
+
+f5xc_api_url      = "https://tenant.console.ves.volterra.io/api"
+f5xc_api_token    = "............................"
+f5xc_tenant       = "................."
+f5xc_api_p12_file = "./certs/tenant.console.ves.volterra.io.api-creds.p12"
