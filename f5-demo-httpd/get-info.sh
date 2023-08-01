@@ -4,9 +4,15 @@ for node in alpha beta; do
   echo "=============> $node <======================"
   export KUBECONFIG=../$node.kubeconfig
   echo ""
+  echo "kubectl get services ..."
+  echo ""
   kubectl get services
   echo ""
+  echo "kubectl get services -n marcel-k0s-site ..."
+  echo ""
   kubectl get services -n marcel-k0s-site
+  echo ""
+  echo "kubectl get nodes -o wide ..."
   echo ""
   kubectl get nodes -o wide
   echo ""
