@@ -2,24 +2,14 @@ resource "volterra_http_loadbalancer" "lb" {
   name                            = format("%s-f5-httpd-demo", var.project_prefix)
   namespace                       = var.f5xc_namespace
   no_challenge                    = true
-  domains                         = [ "f5-httpd-demo" ]
+  domains                         = [ "f5-httpd-demo", "f5-httpd-demo.marcel-k0s-site" ]
 
   disable_rate_limit              = true
   service_policies_from_namespace = true
   disable_waf                     = true
 
   advertise_custom {
-    #    advertise_where {
-    #  site {
-    #    network = "SITE_NETWORK_SERVICE"
-    #    site {
-    #      name      = format("%s-alpha", var.project_prefix)
-    #      namespace = "system"
-    #    }
-    #  }
-    #}
     advertise_where {
-      #      port = 80
       site {
         network = "SITE_NETWORK_OUTSIDE"
         site {
